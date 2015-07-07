@@ -1,3 +1,6 @@
+/*
+ * Author : Samarth Savanur
+ */
 package com.osu.cse.fpl.lisp;
 
 public class MySExpr {
@@ -69,7 +72,7 @@ public class MySExpr {
 		this.cdr = null;
 		this.expr = "";
 		this.integer = numerical;
-		this.isAtom = false;
+		this.isAtom = true;
 		this.isList = false;
 		this.type = MyConstTokens.NUMERICALS;
 		this.isNil = false;
