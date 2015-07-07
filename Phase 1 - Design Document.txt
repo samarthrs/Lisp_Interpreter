@@ -1,0 +1,113 @@
+Samarth Savanur
+200438506
+savanur.1@osu.edu
+LISP Interpreter Phase 1 Submission 
+
+===================================================
+**** PL LISP Interpreter Phase 1 Documentation **** ===================================================
+
+
+*** Program Flow ***
+====================
+
+1] MyInterpreter.java --> Main Java Class
+
+Read the input s-expression from: 
+
+BufferedReader inputExpr = new BufferedReader(new InputStreamReader(System.in));
+
+2] MyStringTokenizer.java 
+
+Here the input strings are tokenized based on alphabets, numbers, special chars, whitespaces.
+
+3] MyParser.java
+
+Gets the input from the buffered reader and stores in into Validator ...
+
+static MyInputValidation validator = new MyInputValidation(inputLine);
+
+Here MySExpr.java class is called for setting car and cdr tree nodes which will be constructed based on the type: 
+
+checkLiteral, checkNumerical, else a special case as S-Expression ...
+
+parseRoot(MySExpr node), cdrParse(MySExpr node), carParse(MySExpr node) are the functions to construct the tree based on the getters and setters from MySExpr.java class.
+
+Traverse function is used to print out the Output:
+For NUMERALS, LITERALS or S-Expressions ...
+
+4] MyInputValidation.java
+
+This class checks for all vilid conditions by providing set of rules and valid characters allowed to enter in Input.
+
+checkInputforvalidsplchar : Check for '(', ')', '.', '-', '+', ' ', '\n', '\t'
+and also checks for signed numerals based on the ASCII values ...
+ 
+5] MyConstTokens.java
+
+Defines and defines all the required constants for the Interpreter ...
+
+Types are as follows ...
+public static int LITERAL = 0;
+public static int NUMERICALS = 1;
+public static int SPL_CASE = 3;
+	
+-----------------------------------------------------------------
+
+**** ABOUT ME ****
+==================
+
+Six Java Classes:
+=================
+
+1] MyConstants : All constants definition and values ... 
+
+2] MyInputValues : Input validation takes place over here .. The   
+   Alphabets, numbers and special characters mainly ...  And for  
+   each method there is a validation function ...
+
+3] MySExpr : Getters and Setters for Cdr & Car .. these Sets the 
+   values here for each car and cdr and whenever requenred gets 
+   the value from them ...
+
+4] MyStringTokenizer : Splitting happens based on $ ... 
+   consecutive numbers, Alphabets, +, -, Para, ., space, $$, \n, 
+   \t, \b are the valid characters ... Here mainly this tokenizes 
+   these input stings into individual ones and feeds to the 
+   respective function ... 
+
+5] MyParser : Tree structure is built in this class where the 
+   tree is right oriented ... left tree is car, right tree is 
+   cdr.
+   Also the display & traverse functions are present to enable 
+   the whole working of the Parsing structure ...
+
+6] MyInterpreter : This is the Main Class and has all function  
+   calls present in respective classes.
+   Read Input from buffer, Check characters of the input  
+   buffer .. validation is done for each character and then it   
+   sends input to parser class for contruction ... 
+
+What Type of Errors !!
+======================
+
+7] Types of Errors : Invalid legth of token ...
+			     Right and left para mismatch ...
+			     I/O exception on Buffer reader or array ...
+                     index out of bounds or when 1/0 ...
+			     Unexpected ./$ occur ...
+			     Invalid Input Entry ...
+			     Tokenizer Errors .. Recognizing tokens vs 
+                     i/p based entry ..
+	
+Sample Flow:
+============
+		
+Based on the i/p provided .. 
+Validation happens and its stored as a left right nodes and 
+the construction of right oriented tree is done. Then to 
+display expression traverse the whole tree based on root, left 
+and right nodes ...
+
+
+-----------------------------------------------------------------
+

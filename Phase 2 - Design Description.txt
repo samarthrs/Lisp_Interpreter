@@ -1,0 +1,158 @@
+Design Description: 
+
+This document describes the salient features of this project and its implementation
+____________________________________
+
+[1] This Lisp interpreter can take input in the form of dot notation as well as list notation. But produces its output in only dot notation. 
+
+[2] During execution, the interpreter interprets '$' as end of single expression and then produces the output in dot notation.
+
+[3] Incase of any error during execution, (syntax error or error during evaluation) the interpreter throws a suitable error message and continues with the next expression unless it reaches a '$$' at the end of that expression
+
+[4] The interpreter exits when it faces '$$' as an input at the end of any expression.
+
+[5] If it is tested using a input file where there are multiple functions or Sexpressions and one of them causes and error 
+then the interpreter will throw suitable error message and check the rest of the file until it reaches '$$'.
+
+[6] This submission of the project includes evaluator feature which performs basic user defined evaluations on the input expressions.
+
+The following files have been submitted as part of this project:
+
+1) MyConstTokens.java
+2) MySExpr.java
+3) MyStringTokenizer.java
+4) MyParser.java
+5) MyInterpreter.java
+6) MyInputValidation.java
+7) MyDefinitionList.java
+8) Makefile
+9) Readme.txt
+10) designdescription.txt
+11) sampleinput.txt
+
+LISP Interpreter has been impemented using the following java classes:
+
+1) MyConstTokens.java
+2) MySExpr.java
+3) MyStringTokenizer.java
+4) MyParser.java
+5) MyInterpreter.java
+6) MyInputValidation.java
+7) MyDefinitionList.java
+
+
+**** ABOUT ME ****
+==================
+
+Seven Java Classes:
+=================
+
+1] MyConstants : All constants definition and values ... 
+
+2] MyInputValidation : Input validation takes place over here .. The   
+   Alphabets, numbers and special characters mainly ...  And for  
+   each method there is a validation function ...
+
+3] MySExpr : Getters and Setters for Cdr & Car .. these Sets the 
+   values here for each car and cdr and whenever requenred gets 
+   the value from them ...
+
+4] MyStringTokenizer : Splitting happens based on $ ... 
+   consecutive numbers, Alphabets, +, -, Para, ., space, $$, \n, 
+   \t, \b are the valid characters ... Here mainly this tokenizes 
+   these input stings into individual ones and feeds to the 
+   respective function ... 
+
+5] MyParser : Tree structure is built in this class where the 
+   tree is right oriented ... left tree is car, right tree is 
+   cdr.
+   Also the display & traverse functions are present to enable 
+   the whole working of the Parsing structure ...
+   Checks for the valid evaluation cases of expression and evaluates the user defined basic evaluations
+
+6] MyInterpreter : This is the Main Class and has all function  
+   calls present in respective classes.
+   Read Input from buffer, Check characters of the input  
+   buffer .. validation is done for each character and then it   
+   sends input to parser class for contruction ... 
+
+7] MyDefinitionList: Provides the body of user defined function, based on the user's input
+
+What Type of Errors !!
+======================
+
+8] Types of Errors : Invalid legth of token ...
+			     Right and left para mismatch ...
+			     I/O exception on Buffer reader or array ...
+                     index out of bounds or when 1/0 ...
+			     Unexpected ./$ occur ...
+			     Invalid Input Entry ...
+			     Tokenizer Errors .. Recognizing tokens vs 
+                     i/p based entry ..
+                     invalid expression evaluation
+	
+Sample Flow:
+============
+		
+Based on the i/p provided .. 
+Validation happens and its stored as a left right nodes and 
+the construction of right oriented tree is done. 
+In case of evluation, the expression is evaluated based on the definition the user provides and then to display expression 
+traverse the whole tree based on root, left 
+and right nodes ...
+
+
+-----------------------------------------------------------------
+
+Part 1 Content:
+-----------------------------------------------------------------
+
+*** Program Flow ***
+====================
+
+1] MyInterpreter.java --> Main Java Class
+
+Read the input s-expression from: 
+
+BufferedReader inputExpr = new BufferedReader(new InputStreamReader(System.in));
+
+2] MyStringTokenizer.java 
+
+Here the input strings are tokenized based on alphabets, numbers, special chars, whitespaces.
+
+3] MyParser.java
+
+Gets the input from the buffered reader and stores in into Validator ...
+
+static MyInputValidation validator = new MyInputValidation(inputLine);
+
+Here MySExpr.java class is called for setting car and cdr tree nodes which will be constructed based on the type: 
+
+checkLiteral, checkNumerical, else a special case as S-Expression ...
+
+parseRoot(MySExpr node), cdrParse(MySExpr node), carParse(MySExpr node) are the functions to construct the tree based on the getters and setters from MySExpr.java class.
+
+Traverse function is used to print out the Output:
+For NUMERALS, LITERALS or S-Expressions ...
+
+4] MyInputValidation.java
+
+This class checks for all vilid conditions by providing set of rules and valid characters allowed to enter in Input.
+
+checkInputforvalidsplchar : Check for '(', ')', '.', '-', '+', ' ', '\n', '\t'
+and also checks for signed numerals based on the ASCII values ...
+ 
+5] MyConstTokens.java
+
+Defines and defines all the required constants for the Interpreter ...
+
+Types are as follows ...
+public static int LITERAL = 0;
+public static int NUMERICALS = 1;
+public static int SPL_CASE = 3;
+	
+-----------------------------------------------------------------
+
+I have sometimes had high-level discussions with my classmates regarding valid and
+invalid inputs and test cases. I have also refered to the Internet for help
+regarding Java programming language features.
